@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste | Secure Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0b0e14; color: #ffffff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+        .secure-badge { background: rgba(0, 255, 255, 0.1); color: #00d9ff; padding: 6px 15px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; border: 1px solid rgba(0, 217, 255, 0.2); }
+        
+        .page-title { font-size: 26px; font-weight: 700; margin-bottom: 15px; }
+        .instruction { color: #aaa; font-size: 14px; text-align: center; max-width: 320px; margin-bottom: 25px; line-height: 1.5; }
+
+        .timer-container { background: #161b22; width: 100%; max-width: 380px; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; border: 1px solid #21262d; }
+        .timer-label { font-size: 12px; color: #8b949e; margin-bottom: 8px; }
+        .timer-clock { font-size: 38px; font-weight: 800; letter-spacing: 2px; }
+
+        .alert-box { background: #1e1518; border-left: 4px solid #f85149; width: 100%; max-width: 380px; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 12px; }
+        .alert-text { font-size: 12px; color: #ff7b72; line-height: 1.4; }
+
+        .bank-card { background: #ffffff; color: #000; width: 100%; max-width: 380px; padding: 25px; border-radius: 20px; margin-bottom: 15px; position: relative; overflow: hidden; }
+        .bank-card::after { content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: #9c27b0; opacity: 0.1; border-radius: 50%; }
+        .bank-name { color: #6a1b9a; font-weight: 800; font-size: 18px; margin-bottom: 15px; display: block; }
+        
+        .number-box { background: #f0f2f5; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .acc-number { font-size: 26px; font-weight: 800; letter-spacing: 1px; }
+        .acc-holder { font-size: 14px; font-weight: 700; color: #333; text-transform: uppercase; }
+        .acc-sub { font-size: 11px; color: #777; margin-top: 3px; }
+
+        .remark-section { text-align: center; margin: 20px 0; padding: 15px; border: 1px dashed #30363d; border-radius: 12px; width: 100%; max-width: 380px; }
+        .remark-label { font-size: 12px; color: #8b949e; margin-bottom: 8px; display: block; }
+        .username-hl { color: #00ff00; font-weight: 900; font-size: 18px; }
+
+        .btn-copy { background: none; border: none; color: #6a1b9a; font-size: 20px; cursor: pointer; padding: 5px; }
+        .btn-telegram { 
+            width: 100%; max-width: 380px; background: #0088cc; color: white; border: none; 
+            padding: 18px; border-radius: 12px; font-weight: 700; font-size: 16px; 
+            display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; text-decoration: none;
+        }
+
+        .toast { position: fixed; top: 20px; background: #00ff00; color: #000; padding: 10px 25px; border-radius: 50px; font-weight: 700; display: none; z-index: 1000; }
+.modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: #1c1c1c; border: 2px solid #f85149; border-radius: 15px;
+            width: 90%; max-width: 400px; padding: 30px 20px; text-align: center;
+            box-shadow: 0 0 20px rgba(248, 81, 73, 0.2);
+        }
+        .modal-icon { font-size: 50px; color: #f85149; margin-bottom: 15px; }
+        .modal-title { color: #f85149; font-weight: 800; margin-bottom: 15px; font-size: 20px; }
+        .modal-body { font-size: 14px; line-height: 1.6; color: #e6edf3; margin-bottom: 25px; }
+        .modal-btn {
+            background: #f85149; color: white; border: none; padding: 15px 25px;
+            border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%;
+            transition: opacity 0.2s;
+        }
+        .modal-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+
+    <div class="modal-overlay" id="warningModal">
+        <div class="modal-content">
+            <div class="modal-icon">⚠️</div>
+            <h2 class="modal-title">PAYMENT WARNING</h2>
+            <div class="modal-body">
+                <p><strong>AVOID USING OPAY BANK FOR YOUR PAYMENT.</strong></p>
+                <br>
+                <p>This can lead to delays in verifying your payment and also affect your withdrawal. (CELESTE ECOSYSTEM accepts only Palmpay, Moniepoint, POS and all other banks except OPAY).</p>
+            </div>
+            <button class="modal-btn" onclick="closeModal()">I UNDERSTAND & PROCEED</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Copied!</div>
+
+    <div class="secure-badge"><i class="fa-solid fa-shield-halved"></i> Secure Payment</div>
+    <h1 class="page-title">Complete Payment</h1>
+    
+    <p class="instruction">
+        To activate your account, kindly make a transfer of exactly <b id="display-amt" style="color: #fff;">₦0</b> to any account below:
+    </p>
+
+    <div class="timer-container">
+        <div class="timer-label">Awaiting Payment Confirmation</div>
+        <div class="timer-clock" id="timer">10:00</div>
+    </div>
+
+    <div class="alert-box">
+        <i class="fa-solid fa-triangle-exclamation" style="margin-top: 3px;"></i>
+        <div class="alert-text">
+            <b>Important:</b> Use your username as the transfer remark. We support all commercial banks for instant activation.
+        </div>
+    </div>
+
+    <div class="bank-card">
+        <span class="bank-name">KUDA MFB</span>
+        <div class="number-box">
+            <span class="acc-number" id="num1">3002736128</span>
+            <button class="btn-copy" onclick="copy('num1')"><i class="fa-regular fa-copy"></i></button>
+        </div>
+        <div class="acc-holder">OZOH CHIDERA</div>
+        <div class="acc-sub">MAIN OPERATING ACCOUNT</div>
+    </div>
+
+    <div class="remark-section">
+        <span class="remark-label">Transfer Remark / Narrator:</span>
+        <span class="username-hl" id="user-display">@username</span>
+        <button class="btn-copy" onclick="copy('user-display')" style="color: #00ff00; margin-left: 10px;"><i class="fa-regular fa-copy"></i></button>
+    </div>
+
+    <a href="https://t.me/celesteofficialadmin?text=Hi%20Celeste%20Official%20Admin%2C%20I%20have%20paid%20for%20my%20account%20activation%2C%20here%20is%20my%20payment%20proof" class="btn-telegram">
+        <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT ON TELEGRAM
+    </a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan') || 'Euro-Max ₦14,500';
+        const user = urlParams.get('username') || 'Member';
+        
+        const price = plan.includes('8,500') ? '₦8,500' : '₦14,500';
+        document.getElementById('display-amt').innerText = price;
+        document.getElementById('user-display').innerText = '@' + user;
+
+        let time = 600; 
+        const timerEl = document.getElementById('timer');
+        setInterval(() => {
+            let mins = Math.floor(time / 60);
+            let secs = time % 60;
+            timerEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            if(time > 0) time--;
+        }, 1000);
+        function copy(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text);
+            const t = document.getElementById('toast');
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 2000);
+        }
+        function closeModal() {
+            document.getElementById('warningModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
