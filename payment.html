@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste | Review Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #050a05; color: #ffffff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+
+        .header { text-align: center; margin-bottom: 30px; margin-top: 20px; }
+        .page-title { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+        .sub-text { color: #888; font-size: 14px; max-width: 280px; margin: 0 auto; line-height: 1.5; }
+
+        .confirm-card {
+            background: linear-gradient(145deg, #0a150a, #050805);
+            width: 100%; max-width: 400px;
+            padding: 30px; border-radius: 25px;
+            border-left: 5px solid #00ff00;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            margin-bottom: 25px;
+        }
+
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 22px; font-size: 14px; border-bottom: 1px solid #1a1a1a; padding-bottom: 12px; }
+        .label { color: #888; }
+        .value { font-weight: 700; color: #fff; text-align: right; }
+        .highlight { color: #00ff00 !important; }
+
+        .total-box { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; }
+        .total-text { font-size: 24px; font-weight: 900; color: #00ff00; }
+
+        .btn-pay {
+            width: 100%; background: #00ff00; color: #000; border: none; padding: 22px;
+            border-radius: 18px; font-weight: 900; font-size: 18px; text-transform: uppercase;
+            cursor: pointer; box-shadow: 0 5px 25px rgba(0, 255, 0, 0.4); margin-bottom: 15px;
+            text-decoration: none; display: block; text-align: center;
+        }
+        .btn-edit { color: #555; text-decoration: underline; font-size: 14px; background: none; border: none; cursor: pointer; display: block; margin: 0 auto; }
+        .toast {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 360px; background: #080808; border: 1px solid #1a1a1a;
+            border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 15px;
+            transition: 0.5s; z-index: 1000;
+        }
+        .toast.active { bottom: 30px; }
+        .icon-box { width: 45px; height: 45px; background: rgba(0,255,0,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #00ff00; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2 class="page-title">ACTIVATE ACCOUNT</h2>
+        <p class="sub-text">Review your information before payment to Celeste Ecosystem.</p>
+    </div>
+
+    <div class="confirm-card">
+        <div class="info-row"><span class="label">Subscriber:</span><span class="value" id="res-name">Loading...</span></div>
+        <div class="info-row"><span class="label">Username:</span><span class="value" id="res-user">@username</span></div>
+        <div class="info-row"><span class="label">Email:</span><span class="value" id="res-email">email@test.com</span></div>
+        <div class="info-row"><span class="label">Phone:</span><span class="value" id="res-phone">0906...</span></div>
+        <div class="info-row" style="border:none;"><span class="label">Plan:</span><span class="value highlight" id="res-plan">Euro-Elite ₦8,500</span></div>
+
+        <div class="total-box">
+            <span class="total-text">Total Due:</span>
+            <span class="total-text" id="res-total">₦8,500</span>
+        </div>
+    </div>
+
+    <a href="#" id="pay-link" class="btn-pay">COMPLETE PAYMENT NOW</a>
+    <button class="btn-edit" onclick="history.back()">Cancel & Edit Details</button>
+
+    <div id="pay-toast" class="toast">
+        <div class="icon-box"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+            <div style="color:#00ff00; font-size: 11px; font-weight: 800; text-transform: uppercase;">PAYMENT RECEIVED</div>
+            <div id="toast-msg" style="font-size: 13px; margin: 3px 0; color: #fff;">...</div>
+            <div style="color:#444; font-size: 10px;">Just now</div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const fullName = urlParams.get('fullname') || 'N/A';
+        const userName = urlParams.get('username') || 'user';
+        const plan = urlParams.get('plan') || 'Euro-Max ₦14,500';
+
+        document.getElementById('res-name').innerText = fullName;
+        document.getElementById('res-user').innerText = '@' + userName;
+        document.getElementById('res-email').innerText = urlParams.get('email') || 'N/A';
+        document.getElementById('res-phone').innerText = urlParams.get('phone') || 'N/A';
+        document.getElementById('res-plan').innerText = plan;
+        
+        const price = plan.includes('8,500') ? '₦8,500' : '₦14,500';
+        document.getElementById('res-total').innerText = price;
+
+        document.getElementById('pay-link').href = `activation.html?${urlParams.toString()}`;
+
+        function showPaymentToast() {
+            const users = ["Chidi E.", "Rapheal E.", "Sade O.", "Tunde A."];
+            const name = users[Math.floor(Math.random()*users.length)];
+            const amt = Math.random() > 0.5 ? "₦14,500" : "₦8,500";
+            
+            document.getElementById('toast-msg').innerHTML = `<strong>${name}</strong> paid <span style="color:#00ff00">${amt}</span> to Celeste.`;
+            const toast = document.getElementById('pay-toast');
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 5000);
+        }
+        setInterval(showPaymentToast, 12000);
+        setTimeout(showPaymentToast, 3000);
+    </script>
+</body>
+</html>
