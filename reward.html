@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste | Choose Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+        body { background-color: #000; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo-img { width: 100px; height: auto; margin-bottom: 5px; }
+        .brand-name { color: #00ff00; font-size: 32px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+        .page-title { margin-top: 20px; font-size: 20px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
+        
+        .plan-container { width: 100%; max-width: 400px; }
+        .card { background: #050505; border: 2px solid #00ff00; border-radius: 25px; padding: 25px 15px; margin-bottom: 40px; position: relative; text-align: center; }
+        .badge { position: absolute; top: -15px; right: 20px; background: #fff; color: #000; padding: 5px 15px; border-radius: 20px; font-size: 10px; font-weight: 900; text-transform: uppercase; z-index: 10; }
+        .plan-name { color: #00ff00; font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+        
+        .price-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .old-price { color: #555; text-decoration: line-through; font-size: 18px; }
+        .current-price { font-size: 42px; font-weight: 900; }
+        
+        .timer-box { background: #ff0000; color: #fff; display: inline-block; padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: bold; margin-bottom: 25px; }
+        
+        /* RESTORED FEATURES */
+        .feature-list { text-align: left; margin-bottom: 20px; }
+        .feature-item { background: #0a110a; border: 1px solid #142b14; border-radius: 12px; padding: 14px; margin-bottom: 8px; font-size: 13px; display: flex; align-items: center; gap: 12px; color: #efefef; }
+        .feature-item i { color: #00ff00; font-size: 14px; width: 20px; text-align: center; }
+        
+        .withdrawal-info { border: 1px dashed #144014; border-radius: 15px; padding: 15px; margin-bottom: 25px; background: rgba(0,255,0,0.02); }
+        .withdrawal-title { color: #00ff00; font-weight: 900; font-size: 12px; display: block; margin-bottom: 5px; }
+
+        .btn-activate { width: 100%; background: #00ff00; color: #000; border: none; padding: 20px; border-radius: 15px; font-weight: 900; font-size: 18px; text-transform: uppercase; cursor: pointer; text-decoration: none; display: block; box-shadow: 0 4px 15px rgba(0,255,0,0.2); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="logo-img">
+        <div class="brand-name">CELESTE</div>
+        <h2 class="page-title">CHOOSE YOUR EARNING PLAN</h2>
+    </div>
+
+    <div class="plan-container">
+        <div class="card" style="border-color: #00ff0088;">
+            <h3 class="plan-name">EURO-LITE</h3>
+            <div class="price-row"><span class="old-price">₦17,000</span><span class="current-price">₦8,500</span></div>
+            <div class="timer-box"><i class="fa-solid fa-clock"></i> DISCOUNT ENDS: <span class="timer" data-seconds="5355">01:29:15</span></div>
+            
+            <div class="feature-list">
+                <div class="feature-item"><i class="fa-solid fa-id-card"></i> One-time Activation Fee: €4.25</div>
+                <div class="feature-item"><i class="fa-solid fa-wallet"></i> €3.50 (₦7,000) Welcome Cashback</div>
+                <div class="feature-item"><i class="fa-solid fa-video"></i> €1 (₦2,000) per Comedy Review</div>
+                <div class="feature-item"><i class="fa-solid fa-brands fa-tiktok"></i> TikTok Live Bonus – €2.5 (₦5,000) per session</div>
+                <div class="feature-item"><i class="fa-solid fa-calendar"></i> Subscription Valid For 6 Months</div>
+                <div class="feature-item"><i class="fa-solid fa-unlock"></i> Limited Earning Potential Upgradeable</div>
+                <div class="feature-item"><i class="fa-solid fa-bolt"></i> Access to TikTok & Telegram Add-ons</div>
+            </div>
+
+            <div class="withdrawal-info">
+                <span class="withdrawal-title">⏰ WITHDRAWAL WINDOW</span>
+                Saturdays (9AM - 6PM)<br>
+                💰 MINIMUM PAYOUT: <strong>₦5,000</strong>
+            </div>
+            <a href="register.html?plan=Euro-Lite+₦8,500" class="btn-activate">Activate Lite Plan</a>
+        </div>
+
+        <div class="card">
+            <div class="badge">Most Profitable</div>
+            <h3 class="plan-name">EURO-MAX</h3>
+            <div class="price-row"><span class="old-price">₦30,000</span><span class="current-price">₦14,500</span></div>
+            <div class="timer-box"><i class="fa-solid fa-clock"></i> DISCOUNT ENDS: <span class="timer" data-seconds="5343">01:29:03</span></div>
+            
+            <div class="feature-list">
+                <div class="feature-item"><i class="fa-solid fa-id-card"></i> One-time Activation Fee: €7.25</div>
+                <div class="feature-item"><i class="fa-solid fa-wallet"></i> €6.00 (₦12,000) Welcome Cashback</div>
+                <div class="feature-item"><i class="fa-solid fa-video"></i> €2 (₦4,000) per Comedy Review</div>
+                <div class="feature-item"><i class="fa-solid fa-brands fa-tiktok"></i> TikTok Live Bonus – €5 (₦10,000) per session</div>
+                <div class="feature-item"><i class="fa-solid fa-calendar"></i> Subscription Valid For 12 Months</div>
+                <div class="feature-item"><i class="fa-solid fa-infinity"></i> Unlimited Daily Review Earnings</div>
+                <div class="feature-item"><i class="fa-solid fa-rocket"></i> Full Access to High-Tier Add-ons</div>
+                <div class="feature-item"> <i class="fa-solid fa-graduation-cap"></i>  Do assignments for foreign kids - £10 (₦20,000)  </div>
+            </div>
+
+            <div class="withdrawal-info">
+                <span class="withdrawal-title"> DAILY WITHDRAWAL ⭐</span>
+                Every Day (9AM - 6PM)<br>
+                💰 MINIMUM PAYOUT: <strong>₦10,000</strong>
+            </div>
+            <a href="register.html?plan=Euro-Max+₦14,500" class="btn-activate">Activate Max Plan</a>
+        </div>
+    </div>
+
+    <script>
+    function startCountdown() {
+        let totalSeconds = 3600; 
+
+        const timerElements = document.querySelectorAll('.timer');
+
+        updateDisplay(totalSeconds);
+
+        const interval = setInterval(() => {
+            totalSeconds--;
+
+            if (totalSeconds < 0) {
+                clearInterval(interval);
+                return;
+            }
+
+            updateDisplay(totalSeconds);
+        }, 1000);
+
+        function updateDisplay(seconds) {
+            let h = Math.floor(seconds / 3600);
+            let m = Math.floor((seconds % 3600) / 60);
+            let s = seconds % 60;
+            const timeString = 
+                String(h).padStart(2, '0') + ":" + 
+                String(m).padStart(2, '0') + ":" + 
+                String(s).padStart(2, '0');
+
+            timerElements.forEach(el => {
+                el.textContent = timeString;
+            });
+        }
+    }
+    window.onload = startCountdown;
+</script>
+</body>
+</html>
