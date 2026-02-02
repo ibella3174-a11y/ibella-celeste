@@ -331,7 +331,24 @@
     </style>
 </head>
 <body>
+<div id="disclaimer-overlay">
+    <div class="disclaimer-modal">
+        <i class="fas fa-triangle-exclamation warning-icon"></i>
+        
+        <h2>APP USAGE WARNING</h2>
+        
+        <p>
+            <strong>AVOID SEARCHING FOR CELESTE ON APP STORES.</strong>
+            <br><br>
+            This can lead to downloading fraudulent clones and losing your account access. 
+            (CELESTE ECOSYSTEM is strictly web-based and does not have an official app on Playstore or Appstore).
+        </p>
 
+        <button class="close-disclaimer-btn" onclick="closeDisclaimer()">
+            I UNDERSTAND & PROCEED
+        </button>
+    </div>
+</div>
     <div class="topbar">
         <a href="reward.html" class="logo-container">
             <img src="logo.png" alt="C" class="logo-img" onerror="this.src='https://via.placeholder.com/45/00ff40/000000?text=C'">
@@ -534,6 +551,88 @@
         </div>
         <div class="copyright">&copy; 2026 Celeste. Where Your Time Turns Into Wealth.</div>
     </footer>
+    <style>
+        #disclaimer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); 
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.disclaimer-modal {
+    background: #1a1a1a;
+    border: 2px solid #ff4d4d; 
+    padding: 40px 30px;
+    border-radius: 25px; 
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 77, 77, 0.2);
+}
+
+.disclaimer-modal i.warning-icon {
+    font-size: 80px;
+    color: #ffcc00; 
+    margin-bottom: 20px;
+}
+
+.disclaimer-modal h2 {
+    color: #ff4d4d; 
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.disclaimer-modal p {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.disclaimer-modal strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.close-disclaimer-btn {
+    background: #ff5c5c;
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.close-disclaimer-btn:hover {
+    background: #ff3333;
+}
+    </style>
+    <script>
+        function closeDisclaimer() {
+        const overlay = document.getElementById('disclaimer-overlay');
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 0.4s ease';
+        
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 400);
+    }
+    </script>
 
 </body>
 </html>
