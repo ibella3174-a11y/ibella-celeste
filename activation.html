@@ -135,33 +135,65 @@
 </a>
 
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const plan = urlParams.get('plan') || 'Euro-Max ₦14,500';
-        const user = urlParams.get('username') || 'Member';
-        
-        const price = plan.includes('8,500') ? '₦8,500' : '₦14,500';
-        document.getElementById('display-amt').innerText = price;
-        document.getElementById('user-display').innerText = '@' + user;
+    <div class="remark-section">
+    <span class="remark-label">TRANSFER REMARK / DESCRIPTION:</span>
+    <span class="username-hl" id="user-display">@Member</span>
+</div>
 
-        let time = 600; 
-        const timerEl = document.getElementById('timer');
-        setInterval(() => {
-            let mins = Math.floor(time / 60);
-            let secs = time % 60;
-            timerEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            if(time > 0) time--;
-        }, 1000);
-        function copy(id) {
-            const text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text);
-            const t = document.getElementById('toast');
-            t.style.display = 'block';
-            setTimeout(() => t.style.display = 'none', 2000);
+<div class="alert-box">
+    <i class="fa-solid fa-triangle-exclamation" style="margin-top: 3px;"></i>
+    <div class="alert-text">
+        <b>Important:</b> Use your username as the transfer remark. We support all commercial banks for instant activation.
+    </div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan') || 'Euro-Max ₦14,500';
+    const user = urlParams.get('username') || 'Member';
+    
+    // Safety check: only update if elements exist
+    const amtEl = document.getElementById('display-amt');
+    const userEl = document.getElementById('user-display');
+    
+    if(amtEl) {
+        const price = plan.includes('8,500') ? '₦8,500' : '₦14,500';
+        amtEl.innerText = price;
+    }
+    
+    if(userEl) {
+        userEl.innerText = '@' + user;
+    }
+
+    // Timer Logic
+    let time = 600; 
+    const timerEl = document.getElementById('timer');
+    
+    const countdown = setInterval(() => {
+        let mins = Math.floor(time / 60);
+        let secs = time % 60;
+        timerEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        
+        if(time <= 0) {
+            clearInterval(countdown);
+            timerEl.innerText = "0:00";
+        } else {
+            time--;
         }
-        function closeModal() {
-            document.getElementById('warningModal').style.display = 'none';
-        }
-    </script>
+    }, 1000);
+
+    function copy(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text);
+        const t = document.getElementById('toast');
+        t.style.display = 'block';
+        setTimeout(() => t.style.display = 'none', 2000);
+    }
+
+    function closeModal() {
+        document.getElementById('warningModal').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
