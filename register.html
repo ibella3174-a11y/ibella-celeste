@@ -33,8 +33,6 @@
             border-radius: 15px; font-weight: 900; font-size: 18px; cursor: pointer;
             margin-top: 15px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
         }
-
-        /* POPUP STYLING */
         .popup-toast {
             position: fixed; bottom: -120px; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 360px; background: #0f0f0f; border: 1px solid #222;
@@ -46,6 +44,29 @@
         .toast-content { flex: 1; font-family: sans-serif; }
         .toast-label { font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
         .toast-text { font-size: 13px; line-height: 1.4; color: #efefef; }
+       .chat-icon {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: linear-gradient(135deg, #00aaff, #00e5ff);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 26px;
+      box-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .chat-icon:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(0, 204, 255, 0.7);
+    }
     </style>
 </head>
 <body>
