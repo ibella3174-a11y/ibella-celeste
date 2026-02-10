@@ -133,16 +133,12 @@ registerForm.addEventListener('submit', function(e) {
 });
 
 function closeModal() {
-    const formData = new FormData(registerForm);
-    const searchParams = new URLSearchParams();
-
-    for (const pair of formData.entries()) {
-        searchParams.append(pair[0], pair[1]);
-    }
+    const username = document.querySelector('input[name="username"]').value;
     modal.style.display = 'none';
-
-    window.location.href = "payment.html?" + searchParams.toString();
+    window.location.href = "dashboard.html?username=" + encodeURIComponent(username);
 }
+
+
     </script>
 </body>
 </html>
