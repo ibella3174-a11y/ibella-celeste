@@ -8,39 +8,52 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial Black', sans-serif; }
         body { background: linear-gradient(135deg, #000000 0%, #001a00 100%); color: #fff; min-height: 100vh; padding: 20px; padding-bottom: 100px; }
+
+        /* Header & Profile */
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 20px; border: 1px solid rgba(0,255,0,0.1); }
         .user-info { display: flex; align-items: center; gap: 12px; }
         .profile-img { width: 45px; height: 45px; background: #00ff00; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 20px; }
         .user-meta { line-height: 1.2; }
         .user-meta span { font-size: 10px; color: #00ff00; font-family: sans-serif; text-transform: uppercase; }
+
+        /* Stats Card */
         .main-balance-card { background: linear-gradient(145deg, #00ff00, #008800); border-radius: 25px; padding: 25px; margin-bottom: 20px; color: #000; position: relative; overflow: hidden; }
         .stat-label { font-size: 12px; font-weight: bold; text-transform: uppercase; opacity: 0.8; }
         .stat-value { font-size: 38px; margin: 5px 0; }
         .sub-value { font-size: 16px; opacity: 0.9; font-family: sans-serif; }
+
+        /* Activate Button */
         .btn-activate { display: block; width: 100%; background: #000; color: #00ff00; text-align: center; padding: 15px; border-radius: 15px; text-decoration: none; font-weight: 900; margin-top: 15px; border: 2px solid transparent; transition: 0.3s; }
         .btn-activate:hover { background: #00ff00; color: #000; }
+
+        /* Quick Links Grid */
         .section-title { font-size: 14px; color: #777; margin: 25px 0 15px 5px; text-transform: uppercase; letter-spacing: 1px; }
         .quick-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         .link-item { background: rgba(0, 255, 0, 0.05); border: 1px solid rgba(0, 255, 0, 0.1); border-radius: 18px; padding: 15px 5px; text-align: center; text-decoration: none; color: #fff; transition: 0.3s; }
         .link-item i { font-size: 18px; color: #00ff00; display: block; margin-bottom: 8px; }
         .link-item span { font-size: 9px; font-family: sans-serif; font-weight: bold; white-space: nowrap; }
         .hidden-links { display: none; }
+
+        /* Bottom Actions & History */
         .history-card { background: #080808; border: 1px solid #1a1a1a; border-radius: 20px; padding: 20px; margin-top: 25px; }
         .history-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #111; }
         .history-item:last-child { border: none; }
         .hist-info { display: flex; align-items: center; gap: 10px; font-family: sans-serif; font-size: 13px; }
         .hist-info i { color: #555; }
         .amount-pos { color: #00ff00; font-weight: bold; }
+
+        /* Support Button */
+    /* TELEGRAM STYLE FOOTER */
 .tg-footer { 
     position: fixed; 
     bottom: 0; 
     left: 0; 
     width: 100%; 
-    background: #0e161e; 
+    background: #0e161e; /* Telegram dark blue/black */
     display: flex; 
     justify-content: space-around; 
     align-items: center; 
-    padding: 8px 0 12px;
+    padding: 8px 0 12px; /* Extra bottom padding for mobile home bars */
     border-top: 1px solid #1c2732;
     z-index: 1000;
 }
@@ -48,7 +61,7 @@
 .nav-tab { 
     text-align: center; 
     text-decoration: none; 
-    color: #708499; 
+    color: #708499; /* Inactive greyish-blue */
     flex: 1; 
     display: flex; 
     flex-direction: column; 
@@ -60,7 +73,7 @@
 .nav-tab i { 
     font-size: 20px; 
     margin-bottom: 4px; 
-    width: 50px; 
+    width: 50px; /* Fixed width for the bubble */
     height: 30px;
     display: flex;
     align-items: center;
@@ -74,14 +87,18 @@
     font-family: sans-serif; 
     font-weight: 500;
 }
+
+/* The "Active" Bubble effect */
 .nav-tab.active { 
     color: #fff; 
 }
 
 .nav-tab.active i {
-    background: #2b5278;
+    background: #2b5278; /* Telegram's active bubble color */
     color: #fff;
 }
+
+/* Small notification badge for Community */
 .badge {
     position: absolute;
     top: -2px;
@@ -94,6 +111,8 @@
     border-radius: 10px;
     border: 2px solid #0e161e;
 }
+
+/* Progress Bar Styling */
 .progress-container { 
     margin-top: 20px; 
     background: rgba(0,0,0,0.3); 
@@ -104,12 +123,14 @@
 }
 
 .progress-bar { 
-    background: #000;
+    background: #000; /* Dark contrast against the green card */
     height: 100%; 
-    width: 0%;
+    width: 0%; /* Will be set by JS */
     transition: width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1); 
     position: relative;
 }
+
+/* Subtle Shimmer Effect */
 .progress-bar::after {
     content: "";
     position: absolute;
@@ -130,8 +151,9 @@
     font-weight: 800;
     display: flex;
     align-items: center;
-    gap: 6px; 
+    gap: 6px; /* Space between icon and text */
 }
+/* Make the progress text pulse slightly to create urgency */
 @keyframes pulse-red {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
@@ -142,10 +164,15 @@
     margin-right: 5px;
     font-size: 14px;
 }
+
+/* Red shimmer for the progress bar to show it's "blocked" or "pending" */
 .progress-bar {
     background: #000;
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
 }
+
+
+
     </style>
 </head>
 <body>
@@ -218,18 +245,18 @@
         <span>Home</span>
     </a>
     
-    <a href="#" class="nav-tab">
+    <a href="withdraw.html" class="nav-tab">
         <i class="fas fa-wallet"></i>
         <span>Withdraw</span>
     </a>
     
-    <a href="https://t.me/+Qs8a8Kwer-5kMTU0" class="nav-tab">
+    <a href="https://t.me/celeste_community" class="nav-tab">
         <span class="badge">9+</span>
         <i class="fas fa-users"></i>
         <span>Community</span>
     </a>
     
-    <a href="#" class="nav-tab">
+    <a href="profile.html" class="nav-tab">
         <i class="fas fa-user-circle"></i>
         <span>Profile</span>
     </a>
@@ -237,19 +264,27 @@
 
 
    <script>
+    // 1. DATA CAPTURE
     const params = new URLSearchParams(window.location.search);
     const username = params.get('username') || 'Member';
     const selectedPlan = params.get('plan') || 'Lite';
-       
+    
+    // Privacy & Cycle state
     let isHidden = false;
     let currentIndex = 0;
+
+    // 2. SET HEADER DATA IMMEDIATELY
     document.getElementById('user-display').innerText = username;
     const planDisplay = document.querySelector('.user-meta span:last-child');
+    
+    // This fixes your Header Plan label
     if (selectedPlan.includes('Max')) {
         planDisplay.innerText = "Euro-Max Package";
     } else {
         planDisplay.innerText = "Euro-Lite Package";
     }
+
+    // 3. DEFINE BALANCES & HISTORY
     const planNaira = selectedPlan.includes('Max') ? "12,000.00" : "7,000.00";
     const planEuro = selectedPlan.includes('Max') ? "6.00" : "3.50";
     const planLabel = selectedPlan.includes('Max') ? "Max" : "Lite";
@@ -260,6 +295,8 @@
         { title: "Telegram Balance", n: "0.00", e: "0.00" },
         { title: "Go Live Earnings", n: "0.00", e: "0.00" }
     ];
+
+    // 4. FIX HISTORY ITEM
     const historyContainer = document.querySelector('.history-card');
     historyContainer.innerHTML = `
         <div class="history-item">
@@ -274,11 +311,17 @@
             <div class="hist-info" style="color: #ff9800;"><i class="fas fa-clock"></i> Activation Pending</div>
             <div style="color: #ff9800; font-size: 11px;">AWAITING...</div>
         </div>
-<div class="history-item">
+
+    
+
+        <div class="history-item">
             <div class="hist-info" style="opacity: 0.6;"><i class="fas fa-check-circle" style="color: #00ff00;"></i> Account Registration</div>
             <div style="color: #00ff00; font-size: 11px;">SUCCESS</div>
         </div>
+
     `;
+
+    // 5. BALANCE UI UPDATE FUNCTION
     function updateUI() {
         const data = balances[currentIndex];
         const titleEl = document.getElementById('balance-title');
@@ -295,6 +338,8 @@
             if(subEl) subEl.innerText = "€" + data.e;
         }
     }
+
+    // 6. EYE TOGGLE
     function toggleBalanceVisibility() {
         isHidden = !isHidden;
         const eye = document.getElementById('toggle-eye');
@@ -302,10 +347,14 @@
         eye.classList.toggle('fa-eye-slash');
         updateUI();
     }
+
+    // 7. AUTO-CYCLE
     setInterval(() => {
         currentIndex = (currentIndex + 1) % balances.length;
         updateUI();
     }, 4000);
+
+    // 8. PROGRESS BAR (85%)
     function setLockedState(percentage) {
         const progressBar = document.getElementById('withdraw-progress');
         const progressStatus = document.getElementById('withdraw-status');
@@ -316,6 +365,8 @@
             }, 500);
         }
     }
+
+    // 9. GREETING & VIEW MORE
     const hour = new Date().getHours();
     let greet = hour < 12 ? "Good Morning!" : hour < 17 ? "Good Afternoon!" : "Good Evening!";
     document.getElementById('greeting-text').innerText = greet;
@@ -327,8 +378,13 @@
         hidden.forEach(el => el.style.display = isShowing ? 'none' : 'block');
         btn.innerHTML = isShowing ? 'VIEW MORE <i class="fas fa-chevron-down"></i>' : 'VIEW LESS <i class="fas fa-chevron-up"></i>';
     }
+
+    // RUN ON LOAD
     updateUI();
     setLockedState(85);
 </script>
+
+
+
 </body>
 </html>
