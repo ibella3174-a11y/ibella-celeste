@@ -165,30 +165,35 @@
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const plan = urlParams.get('plan') || 'Euro-Max ₦14,500';
+    const plan = urlParams.get('plan'); 
     const user = urlParams.get('username') || 'Member';
     
     const amtEl = document.getElementById('display-amt');
     const userEl = document.getElementById('user-display');
     
     if(amtEl) {
-        const price = plan.includes('8,500') ? '₦8,500' : '₦14,500';
-        amtEl.innerText = price;
+        if (plan === 'Lite') {
+            amtEl.innerText = '₦8,500';
+        } else {
+            amtEl.innerText = '₦14,500';
+        }
     }
-    
     if(userEl) {
         userEl.innerText = '@' + user;
     }
-
     let time = 600; 
     const timerEl = document.getElementById('timer');
     const countdown = setInterval(() => {
         let mins = Math.floor(time / 60);
         let secs = time % 60;
         timerEl.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-        if(time <= 0) { clearInterval(countdown); timerEl.innerText = "0:00"; } else { time--; }
+        if(time <= 0) { 
+            clearInterval(countdown); 
+            timerEl.innerText = "0:00"; 
+        } else { 
+            time--; 
+        }
     }, 1000);
-
     function copy(id) {
         let text = document.getElementById(id).innerText;
         if(id === 'user-display') { text = text.replace('@', ''); }
@@ -204,6 +209,7 @@
         document.getElementById('warningModal').style.display = 'none';
     }
 </script>
+
 
 </body>
 </html>
