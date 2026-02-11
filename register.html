@@ -119,26 +119,34 @@
 
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-const selectedPlan = params.get('plan');
-const registerForm = document.querySelector('form');
-const modal = document.getElementById('successModal');
-if (selectedPlan) {
-    document.getElementById('js-plan').innerText = selectedPlan;
-    document.getElementById('hidden-plan').value = selectedPlan;
-}
-registerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    modal.style.display = 'flex'; 
-});
+    // 1. Capture the plan from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const plan = urlParams.get('plan') || 'Lite'; // Default to Lite if something goes wrong
 
-function closeModal() {
-    const username = document.querySelector('input[name="username"]').value;
-    modal.style.display = 'none';
-    window.location.href = "dashboard.html?username=" + encodeURIComponent(username);
-}
+    // 2. Update the UI text so the user sees what they picked
+    const planText = document.getElementById('js-plan');
+    const hiddenPlanInput = document.getElementById('hidden-plan');
 
+    if (plan === 'Max') {
+        planText.innerText = "Euro-Max ₦14,500";
+        hiddenPlanInput.value = "Max";
+    } else {
+        planText.innerText = "Euro-Lite ₦8,500";
+        hiddenPlanInput.value = "Lite";
+    }
 
-    </script>
+    // 3. Handle Form Submission
+    document.querySelector('form').onsubmit = function(e) {
+        e.preventDefault();
+        
+        // Get the username entered by the user
+        const usernameInput = document.querySelector('input[name="username"]').value;
+        
+        // Redirect to dashboard with the data
+        // We use encodeURIComponent to handle spaces or special characters in names
+        window.location.href = `dashboard.html?username=${encodeURIComponent(usernameInput)}&plan=${plan}`;
+    };
+</script>
+
 </body>
 </html>
