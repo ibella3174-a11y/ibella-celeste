@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste | Confirm Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+        body { background-color: #0b0e0b; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        .header { text-align: center; margin-bottom: 40px; margin-top: 10px; }
+        .logo-img { width: 120px; height: auto; margin-bottom: 10px; }
+        .brand-name { color: #00ff00; font-size: 22px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+
+        .main-card { 
+            background: #111411; 
+            width: 100%; 
+            max-width: 400px; 
+            border-radius: 30px; 
+            padding: 40px 25px; 
+            text-align: center;
+            border: 1px solid #1a1f1a;
+        }
+
+        .title-area { margin-bottom: 30px; }
+        .main-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .main-title span { color: #00ff00; }
+        .subtitle { color: #888; font-size: 16px; }
+
+        .plan-box {
+            background: #181d18;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+            transition: 0.3s ease;
+        }
+
+        /* Highlight style for the selected plan */
+        .plan-box.selected {
+            border-color: #00ff00;
+            background: #1a241a;
+        }
+
+        .current-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #00ff00;
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        .plan-name { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .plan-price { font-size: 24px; font-weight: 900; color: #00ff00; margin-bottom: 12px; }
+        .plan-meta { color: #aaa; font-size: 13px; line-height: 1.5; }
+
+        .btn-continue {
+            width: 100%;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 20px;
+            border-radius: 18px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(0,255,0,0.1);
+        }
+
+        .dimmed { opacity: 0.4; filter: grayscale(0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="logo.png" alt="CELESTE" class="logo-img">
+        <div class="brand-name">CELESTE</div>
+    </div>
+
+    <div class="main-card">
+        <div class="title-area">
+            <h1 class="main-title">Choose Your <span>Plan</span></h1>
+            <p class="subtitle">Select a package to continue</p>
+        </div>
+
+        <div id="lite-box" class="plan-box">
+            <div id="lite-badge" class="current-badge" style="display: none;">Current Plan</div>
+            <h3 class="plan-name">Euro-Lite</h3>
+            <div class="plan-price">₦8,500</div>
+            <p class="plan-meta">Basic earning access • Limited views</p>
+        </div>
+
+        <div id="max-box" class="plan-box">
+            <div id="max-badge" class="current-badge" style="display: none;">Current Plan</div>
+            <h3 class="plan-name">Euro-Max</h3>
+            <div class="plan-price">₦14,500</div>
+            <p class="plan-meta">Maximum earnings • Priority approval</p>
+        </div>
+
+        <button class="btn-continue" onclick="proceed()">Continue to Payment</button>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const userPlan = params.get('plan');
+
+        const liteBox = document.getElementById('lite-box');
+        const maxBox = document.getElementById('max-box');
+        const liteBadge = document.getElementById('lite-badge');
+        const maxBadge = document.getElementById('max-badge');
+
+        if (userPlan === 'Max') {
+            maxBox.classList.add('selected');
+            maxBadge.style.display = 'block';
+            liteBox.classList.add('dimmed');
+        } else {
+            liteBox.classList.add('selected');
+            liteBadge.style.display = 'block';
+            maxBox.classList.add('dimmed');
+        }
+
+        function proceed() {
+            window.location.href = `payment.html?plan=${userPlan}`;
+        }
+    </script>
+</body>
+</html>
