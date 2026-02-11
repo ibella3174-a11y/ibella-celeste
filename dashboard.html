@@ -178,7 +178,7 @@
     </div>
     <div class="progress-text" id="withdraw-status"></div>
 
-    <a href="payment.html" class="btn-activate">Activate Account</a>
+    <a href="confirm.html" class="btn-activate">Activate Account</a>
 </div>
 
 
@@ -327,6 +327,8 @@
         hidden.forEach(el => el.style.display = isShowing ? 'none' : 'block');
         btn.innerHTML = isShowing ? 'VIEW MORE <i class="fas fa-chevron-down"></i>' : 'VIEW LESS <i class="fas fa-chevron-up"></i>';
     }
+const activateBtn = document.querySelector('.btn-activate');
+activateBtn.href = `confirm.html?plan=${selectedPlan}`;
     updateUI();
     setLockedState(85);
 </script>
