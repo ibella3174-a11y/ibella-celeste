@@ -119,11 +119,8 @@
 
 
     <script>
-    // 1. Capture the plan from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const plan = urlParams.get('plan') || 'Lite'; // Default to Lite if something goes wrong
-
-    // 2. Update the UI text so the user sees what they picked
+    const plan = urlParams.get('plan') || 'Lite'; 
     const planText = document.getElementById('js-plan');
     const hiddenPlanInput = document.getElementById('hidden-plan');
 
@@ -134,16 +131,9 @@
         planText.innerText = "Euro-Lite ₦8,500";
         hiddenPlanInput.value = "Lite";
     }
-
-    // 3. Handle Form Submission
     document.querySelector('form').onsubmit = function(e) {
         e.preventDefault();
-        
-        // Get the username entered by the user
         const usernameInput = document.querySelector('input[name="username"]').value;
-        
-        // Redirect to dashboard with the data
-        // We use encodeURIComponent to handle spaces or special characters in names
         window.location.href = `dashboard.html?username=${encodeURIComponent(usernameInput)}&plan=${plan}`;
     };
 </script>
