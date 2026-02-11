@@ -145,10 +145,209 @@
     background: #000;
     box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
 }
+         :root {
+            --primary-blue: #0088cc;
+            --telegram-gradient: linear-gradient(135deg, #0088cc 0%, #0055ff 100%);
+            --accent-orange: #ff5722;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        #popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(7px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        #popup {
+            background: var(--glass-bg);
+            border-radius: 24px;
+            width: 90%;
+            max-width: 380px;
+            position: relative;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: popupEntrance 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popupEntrance {
+            from { opacity: 0; transform: scale(0.8) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .popup-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .info-badge {
+            background: #eef7ff;
+            color: var(--primary-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .action-circle {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--accent-orange);
+            transition: all 0.3s ease;
+        }
+
+        #closeBtn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: #333;
+            cursor: pointer;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #closeBtn:hover {
+            color: #ff0000;
+            transform: rotate(90deg);
+        }
+        .popup-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 1.4rem;
+            color: #111;
+            margin: 10px 0;
+            line-height: 1.2;
+        }
+
+        h2 span {
+            color: var(--primary-blue);
+        }
+
+        p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .join-btn {
+            position: relative;
+            background: var(--telegram-gradient);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 85, 255, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .join-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 30%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -60%; }
+            20% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        .join-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 85, 255, 0.4);
+        }
+
+        .join-btn i {
+            font-size: 1.2rem;
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
+<div id="popup-overlay">
+    <div id="popup">
+        <div class="popup-top">
+            <div class="info-badge">
+                <i class="fa fa-circle-check"></i> Verified 
+            </div>
+            <div class="action-circle" id="timer-container">
+                <span id="timer-text">10</span>
+                <button id="closeBtn">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
 
+        <img src="IMG-20260209-WA0023.jpg" class="popup-image" alt="Promotion" />
+
+        <h2>⏳ Before February <span>Ends…</span></h2>
+        <p>
+Make it count.
+This month of love, show yourself some love by activating your Celeste account 💚</br>
+
+Unlock all features.
+Start earning.
+Scale with confidence.
+</br>
+Don’t wait till next month to start winning. 🚀🔥</p>
+
+        <a href="https://t.me/clicksensewithDivineTv/694" target="_blank">
+            <button class="join-btn">
+                <span>Join Official Channel</span>
+                <i class="fa-brands fa-telegram"></i>
+            </button>
+        </a>
+    </div>
+</div>
     <div class="header">
         <div class="user-info">
             <div class="profile-img"><i class="fas fa-user"></i></div>
@@ -329,6 +528,30 @@
     }
 const activateBtn = document.querySelector('.btn-activate');
 activateBtn.href = `confirm.html?plan=${selectedPlan}`;
+       let countdown = 10;
+    const timerText = document.getElementById("timer-text");
+    const closeBtn = document.getElementById("closeBtn");
+    const timerContainer = document.getElementById("timer-container");
+    const popupOverlay = document.getElementById("popup-overlay");
+
+    const interval = setInterval(() => {
+        countdown--;
+        timerText.textContent = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(interval);
+            timerText.style.display = "none";
+            timerContainer.style.border = "none"; 
+            closeBtn.style.display = "block";
+        }
+    }, 1000);
+    closeBtn.addEventListener("click", () => {
+        popupOverlay.style.opacity = "0";
+        popupOverlay.style.transition = "0.3s";
+        setTimeout(() => {
+            popupOverlay.style.display = "none";
+        }, 300);
+    });
     updateUI();
     setLockedState(85);
 </script>
