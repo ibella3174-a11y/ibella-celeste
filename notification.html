@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste | Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial Black', sans-serif; }
+        body { background: linear-gradient(135deg, #000000 0%, #001a00 100%); color: #fff; min-height: 100vh; padding: 20px; }
+        
+        .nav-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .back-btn { color: #00ff00; font-size: 20px; text-decoration: none; }
+        
+        .notif-container { display: flex; flex-direction: column; gap: 15px; }
+        
+        .notif-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(0, 255, 0, 0.1); 
+            border-radius: 20px; 
+            padding: 15px; 
+            display: flex; 
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notif-card.unread { border-left: 4px solid #00ff00; background: rgba(0, 255, 0, 0.03); }
+        
+        .notif-icon { 
+            width: 45px; height: 45px; 
+            background: rgba(0, 255, 0, 0.1); 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #00ff00; 
+            font-size: 18px; 
+        }
+
+        .notif-content h4 { font-size: 14px; margin-bottom: 4px; color: #fff; }
+        .notif-content p { font-size: 12px; color: #aaa; font-family: sans-serif; line-height: 1.4; }
+        .notif-time { font-size: 10px; color: #555; margin-top: 8px; font-family: sans-serif; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <h2>Notifications</h2>
+    </div>
+
+       <div class="notif-container">
+        <a href="https://t.me/clicksensewithDivineTv/694" target="_blank" style="text-decoration: none; display: block;">
+            <div class="notif-card unread" style="background: rgba(0, 136, 204, 0.1); border-color: rgba(0, 136, 204, 0.3);">
+                <div class="notif-icon" style="color: #0088cc; background: rgba(0, 136, 204, 0.1);">
+                    <i class="fab fa-telegram-plane"></i>
+                </div>
+                <div class="notif-content">
+                    <h4 style="color: #0088cc;">Stay Updated! 🚀</h4>
+                    <p>Join our official Telegram channel for the latest news, earning tips, and ecosystem updates.</p>
+                    <div class="notif-time" style="color: #0088cc;">Tap to join</div>
+                </div>
+                <i class="fas fa-external-link-alt" style="position: absolute; top: 15px; right: 15px; font-size: 12px; color: rgba(0, 136, 204, 0.5);"></i>
+            </div>
+        </a>
+
+        <div class="notif-card unread">
+            <div class="notif-icon"><i class="fas fa-gift"></i></div>
+            <div class="notif-content">
+                <h4>Welcome Bonus Added!</h4>
+                <p>Congratulations! Your welcome cashback has been credited to your All Time Earnings.</p>
+                <div class="notif-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="notif-card">
+            <div class="notif-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="notif-content">
+                <h4>Security Alert</h4>
+                <p>Complete your account activation to unlock full withdrawal features.</p>
+                <div class="notif-time">2 hours ago</div>
+            </div>
+        </div>
+
+        <div class="notif-card">
+            <div class="notif-icon"><i class="fas fa-bullhorn"></i></div>
+            <div class="notif-content">
+                <h4>System Update</h4>
+                <p>The Celeste Euro-Max engine has been optimized for faster task processing.</p>
+                <div class="notif-time">Yesterday</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
